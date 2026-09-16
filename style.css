@@ -1,0 +1,106 @@
+/* Base layout */
+.game-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+}
+
+/* Player */
+.player {
+  position: absolute;
+  left: 80px; /* distance from left edge */
+  width: 64px;
+  height: 64px;
+  /* ---- placeholder sprite (64 × 64 px, cyber‑punk style) ---- */
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABbUlEQVR4nO3YvU4CURAF0P+7kVQZXDS2hRLdnAiEJKIIYgjEZk0NkApRCKRKP6f340+AAAAAPsNH9fH+DAfTvcXQXxkYtKVxIN0XZ8Wup52vzSKEsQcAvpzx3vUG9q084CFyCxF0+CboTI5H5QJKECdx7EKjGEMcqp5n+/7qDyT1BdRAe5/vcCjxCjzK+O12B1AeyFjz/Ca5kDciZ/O6hhD7BxyGXdOEVp6y4ZtkGzF5r8a/2UlGkvQMbwR+tbUy0AN3PmN5BZCgGeXzbrUyvg0iW7W+5KCz1EN2+GEmAS85u05Fla+59AHcXhI2QXIN4c6SCuNBEwCsiBHgdqtWciSAcQ+MyQt9JATwq8jjRA1mtACgkG8FYgqhGQjoSLgJZUNWLSWwvgWVXw5l23zXkDMGrMfF9AH0btykPAnJJZp6/UAtzpV2iVPKH0TD3kDHQGDE2+l/JiUAAAAASUVORK5CYII");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: hotpink; /* fallback colour for visibility */
+  z-index: 10; /* ensure player is on top */
+  border-radius: 6px;
+}
+
+
+/* Obstacle base */
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  width: 40px;
+  height: 80px;
+  animation: moveObstacle 3s linear infinite;
+}
+@keyframes moveObstacle {
+  from { right: -60px; }
+  to { right: 100%; }
+}
+
+/* UI */
+.ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+#high-score { top: 10px; right: 10px; left: auto; }
+#level { top: 40px; left: 10px; }
+
+/* Flash overlay */
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 0.3s ease;
+}
+.flash.active { opacity: 1; }
+
+/* Mission intel */
+.mission {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+  color: #00ffff;
+  font-size: 2rem;
+  font-family: 'Inter', sans-serif;
+  opacity: 0;
+  z-index: 20;
+  transition: opacity 0.5s ease;
+}
+.mission.show { opacity: 1; }
+
+/* Game over overlay */
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  z-index: 30;
+}
+.game-over.hidden { display: none; }
+.game-over button { margin-top: 20px; padding: 10px 20px; font-size: 1rem; cursor: pointer; }
+
+/* Obstacle type backgrounds (placeholder colors) */
+.obstacle.structural-block { background: #ff00ff; }
+.obstacle.laser-grid { background: #00ffcc; }
+.obstacle.drone { background: #ff8800; }
